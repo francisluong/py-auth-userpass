@@ -35,7 +35,7 @@ class Test_Userpass(object):
         assert_equal( sorted(userpass.keys()), ["user1", "user2"] )
 
     def test_userpass_004(self):
-        """Check userpass file load"""
+        """Check userpass file load works and sets file permissions to 600"""
         #write yaml file
         filepath = "/var/tmp/test.userpass.004.yml"
         f = open( filepath, "w")
@@ -46,9 +46,17 @@ class Test_Userpass(object):
         defaultuser: user1
         """)
         f.close()
+        #set group readable
+        import os,stat
+        os.chmod( filepath, stat.S_IRUSR|stat.S_IWUSR|stat.S_IRGRP)
+        beforestat = os.stat(filepath)
+        assert_equal( bool(beforestat.st_mode & stat.S_IRGRP), True )
         #read in yaml pwdb
         userpass = Userpass()
         userpass.load( filepath )
+        #verify file is not group readable after load
+        afterstat = os.stat(filepath)
+        assert_equal( bool(afterstat.st_mode & stat.S_IRGRP), False )
         #perform checks per testcases above
         assert_equal( userpass.user(), "user1" )
         assert_equal( userpass.passwd(), "passwd1" )
