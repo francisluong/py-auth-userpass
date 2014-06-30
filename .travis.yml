@@ -4,5 +4,6 @@ python:
 install:
     - pip install .
     - pip install -r requirements.txt
+    - pip install rednose
 script: nosetests test --rednose --verbosity=3 --with-coverage --cover-package auth
 
