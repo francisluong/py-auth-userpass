@@ -12,5 +12,6 @@ setup(
     description = ("Simple but not so secure username and password handling"),
     license = "MIT",
     url = "https://github.com/francisluong/py-auth-userpass",
-    install_requires=install_reqs
+    install_requires=install_reqs,
+    packages=['auth']
 )
