@@ -4,5 +4,5 @@ python:
 install:
     - pip install .
     - pip install -r requirements.txt
-script: nosetests  test --verbosity=3 --with-coverage --cover-package auth
+script: nosetests test --rednose --verbosity=3 --with-coverage --cover-package auth
 
