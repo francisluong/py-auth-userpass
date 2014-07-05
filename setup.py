@@ -9,7 +9,7 @@ setup(
     version = "0.0.1",
     author = "Francis Luong (Franco)",
     author_email = "networkascode@definefunk.com",
-    description = ("Simple but not so secure username and password handling"),
+    description = ("Simple but not so secure username and password storage and retrieval"),
     license = "LICENSE.txt",
     url = "https://github.com/francisluong/py-auth-userpass",
     install_requires=install_reqs,

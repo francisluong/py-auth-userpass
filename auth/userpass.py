@@ -2,6 +2,7 @@ from Crypto.Cipher import AES
 from Crypto import Random
 
 class Userpass:
+    """A simple but not so secure object for username and password storage and retrieval"""
 
     def __init__ (self):
         self.length = dict()
@@ -26,9 +27,12 @@ class Userpass:
         """return current user"""
         return self.current_user
 
-    def passwd (self):
-        """return password for current user"""
-        user = self.current_user
+    def passwd (self, input_user="CURRENTUSER"):
+        """return password for specified input_user or current user"""
+        if input_user == "CURRENTUSER":
+            user = self.current_user
+        else:
+            user = input_user
         length = self.length[user]
         c = AES.new(self.key, self.mode, self.iv)
         return c.decrypt(self.database[user])[0:length]
@@ -55,6 +59,10 @@ class Userpass:
         if yamldict.has_key("defaultuser"):
             #set default user from defaultuser key
             self.change_user( yamldict["defaultuser"] )
+
+    def users(self):
+        """alias --> self.keys()"""
+        return self.keys()
 
     def keys(self):
         """get list of users"""

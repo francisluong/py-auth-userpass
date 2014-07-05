@@ -14,6 +14,7 @@ class Test_Userpass(object):
         userpass.add_user_passwd("user2", "passwd2")
         assert_equal( userpass.user(), "user1" )
         assert_equal( userpass.passwd(), "passwd1" )
+        assert_equal( userpass.passwd("user2"), "passwd2")
 
     def test_userpass_002(self):
         """Check userpass vs. 2 user adds, switch users"""
