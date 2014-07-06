@@ -1,7 +1,7 @@
 py-auth-userpass
 ================
 
-Simple but not so secure username and password handling
+Simple but not so secure username and password storage and retrieval
 
 [![Build Status](https://travis-ci.org/francisluong/py-auth-userpass.svg?branch=master)](https://travis-ci.org/francisluong/py-auth-userpass)
 
