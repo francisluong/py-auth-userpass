@@ -1,1 +1,17 @@
-../.travis.yml
+language: python
+python:
+- '2.7'
+install:
+- pip install .
+- pip install -r requirements.txt
+- pip install rednose coverage
+- git branch --list
+script: nosetests test --rednose --verbosity=3 --with-coverage --cover-package auth
+deploy:
+  provider: pypi
+  user: franco
+  password:
+    secure: SU7MpWxQQEPISdk2yFcNa8poGGwtDGq28TEI5iKydhNytxvS+7WlXd/5V6scwzY5be1AsJjU+zG3zG+pTzLVqDYkMXlctoLcxdR3+fGnMaOM9N7TLJHJqHrNWIr16r25Gtv7JYM02ReqWr10BEJXabrG9adgljAStlc7lbzrolI=
+  on:
+    tags: true
+    repo: francisluong/py-auth-userpass

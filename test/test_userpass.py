@@ -12,9 +12,9 @@ class Test_Userpass(object):
         userpass = Userpass()
         userpass.add_user_passwd("user1", "passwd1")
         userpass.add_user_passwd("user2", "passwd2")
-        assert_equal( userpass.user(), "user1" )
-        assert_equal( userpass.passwd(), "passwd1" )
-        assert_equal( userpass.passwd("user2"), "passwd2")
+        assert_equal( userpass.user, "user1" )
+        assert_equal( userpass.passwd, "passwd1" )
+        assert_equal( userpass.passwd_for("user2"), "passwd2")
 
     def test_userpass_002(self):
         """Check userpass vs. 2 user adds, switch users"""
@@ -22,8 +22,8 @@ class Test_Userpass(object):
         userpass.add_user_passwd("user1", "passwd1")
         userpass.add_user_passwd("user2", "passwd2")
         userpass.change_user( "user2" )
-        assert_equal( userpass.user(), "user2" )
-        assert_equal( userpass.passwd(), "passwd2" )
+        assert_equal( userpass.user, "user2" )
+        assert_equal( userpass.passwd, "passwd2" )
 
     def test_userpass_003(self):
         """Check userpass vs. 2 user adds, keys and has_key"""
@@ -34,6 +34,7 @@ class Test_Userpass(object):
         assert_equal( userpass.has_key("user2"), True )
         assert_equal( userpass.has_key("user3"), False )
         assert_equal( sorted(userpass.keys()), ["user1", "user2"] )
+        assert_equal( sorted(userpass.keys()), sorted(userpass.users()) )
 
     def test_userpass_004(self):
         """Check userpass file load works and sets file permissions to 600"""
@@ -53,17 +54,16 @@ class Test_Userpass(object):
         beforestat = os.stat(filepath)
         assert_equal( bool(beforestat.st_mode & stat.S_IRGRP), True )
         #read in yaml pwdb
-        userpass = Userpass()
-        userpass.load( filepath )
+        userpass = Userpass( filepath )
         #verify file is not group readable after load
         afterstat = os.stat(filepath)
         assert_equal( bool(afterstat.st_mode & stat.S_IRGRP), False )
         #perform checks per testcases above
-        assert_equal( userpass.user(), "user1" )
-        assert_equal( userpass.passwd(), "passwd1" )
+        assert_equal( userpass.user, "user1" )
+        assert_equal( userpass.passwd, "passwd1" )
         userpass.change_user( "user2" )
-        assert_equal( userpass.user(), "user2" )
-        assert_equal( userpass.passwd(), "passwd2" )
+        assert_equal( userpass.user, "user2" )
+        assert_equal( userpass.passwd, "passwd2" )
         assert_equal( userpass.has_key("user1"), True )
         assert_equal( userpass.has_key("user2"), True )
         assert_equal( userpass.has_key("user3"), False )

@@ -4,7 +4,7 @@ from Crypto import Random
 class Userpass:
     """A simple but not so secure object for username and password storage and retrieval"""
 
-    def __init__ (self):
+    def __init__ (self,filepath=""):
         self.length = dict()
         self.database = dict()
         self.current_user = ""
@@ -12,6 +12,8 @@ class Userpass:
         self.bs = 32
         self.key = Random.new().read(self.bs)
         self.iv = Random.new().read(16)
+        if filepath != "":
+            self.load(filepath)
 
     def add_user_passwd (self, user, passwd):
         """add a username/password"""
@@ -23,11 +25,20 @@ class Userpass:
         c = AES.new(self.key, self.mode, self.iv)
         self.database[user] = c.encrypt(passwd.ljust(self.bs))
 
+    @property
     def user (self):
-        """return current user"""
+        """value: current user"""
         return self.current_user
 
-    def passwd (self, input_user="CURRENTUSER"):
+    @property
+    def passwd (self):
+        """value: password for current user"""
+        user = self.current_user
+        length = self.length[user]
+        c = AES.new(self.key, self.mode, self.iv)
+        return c.decrypt(self.database[user])[0:length]
+
+    def passwd_for (self, input_user="CURRENTUSER"):
         """return password for specified input_user or current user"""
         if input_user == "CURRENTUSER":
             user = self.current_user
