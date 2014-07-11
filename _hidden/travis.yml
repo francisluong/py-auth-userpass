@@ -13,5 +13,5 @@ deploy:
   password:
     secure: SU7MpWxQQEPISdk2yFcNa8poGGwtDGq28TEI5iKydhNytxvS+7WlXd/5V6scwzY5be1AsJjU+zG3zG+pTzLVqDYkMXlctoLcxdR3+fGnMaOM9N7TLJHJqHrNWIr16r25Gtv7JYM02ReqWr10BEJXabrG9adgljAStlc7lbzrolI=
   on:
-    tags: true
     repo: francisluong/py-auth-userpass
+    branch: master

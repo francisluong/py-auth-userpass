@@ -1,5 +1,5 @@
 # python
-from auth.userpass import Userpass
+from auth.userpass import Userpass, UserpassError
 from nose.tools import assert_equal
 from nose.tools import assert_not_equal
 from nose.tools import assert_raises
@@ -22,7 +22,7 @@ class Test_Userpass(object):
         userpass = Userpass()
         userpass.add_user_passwd("user1", "passwd1")
         userpass.add_user_passwd("user2", "passwd2")
-        userpass.change_user( "user2" )
+        userpass.user = "user2"
         assert_equal( userpass.user, "user2" )
         assert_equal( userpass.passwd, "passwd2" )
 
@@ -62,11 +62,18 @@ class Test_Userpass(object):
         #perform checks per testcases above
         assert_equal( userpass.user, "user1" )
         assert_equal( userpass.passwd, "passwd1" )
-        userpass.change_user( "user2" )
+        userpass.user = "user2"
         assert_equal( userpass.user, "user2" )
         assert_equal( userpass.passwd, "passwd2" )
         assert_equal( userpass.has_key("user1"), True )
         assert_equal( userpass.has_key("user2"), True )
         assert_equal( userpass.has_key("user3"), False )
 
-
+    @raises(UserpassError)
+    def test_userpass_005(self):
+        """Switch to invalid user"""
+        userpass = Userpass()
+        userpass.add_user_passwd("user1", "passwd1")
+        userpass.add_user_passwd("user2", "passwd2")
+        userpass.user = "user3"
+        assert_equal( userpass.passwd, "passwd2" )

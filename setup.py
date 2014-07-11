@@ -6,7 +6,7 @@ install_reqs = list(filter(None, req_lines))
 
 setup(
     name = "auth-userpass",
-    version = "0.2.0",
+    version = "0.3.0",
     author = "Francis Luong (Franco)",
     author_email = "networkascode@definefunk.com",
     description = ("Simple but not so secure username and password storage and retrieval"),
