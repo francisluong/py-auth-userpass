@@ -4,6 +4,7 @@ py-auth-userpass
 Simple but not so secure username and password storage and retrieval
 
 [![Build Status](https://travis-ci.org/francisluong/py-auth-userpass.svg?branch=master)](https://travis-ci.org/francisluong/py-auth-userpass)
+[![PyPI version](https://badge.fury.io/py/auth-userpass.svg)](http://badge.fury.io/py/auth-userpass)
 
 Requirements
 ------------

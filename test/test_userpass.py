@@ -1,5 +1,5 @@
 # python
-from auth.userpass import Userpass, UserpassError
+from userpass import Userpass, UserpassError
 from nose.tools import assert_equal
 from nose.tools import assert_not_equal
 from nose.tools import assert_raises
