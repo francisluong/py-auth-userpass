@@ -5,7 +5,7 @@ req_lines = [line.strip() for line in open("requirements.txt").readlines()]
 install_reqs = list(filter(None, req_lines))
 
 setup(
-    name = "authuserpass",
+    name = "auth-userpass",
     version = "0.5.0",
     author = "Francis Luong (Franco)",
     author_email = "networkascode@definefunk.com",
