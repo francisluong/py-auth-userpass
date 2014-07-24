@@ -17,10 +17,10 @@ Usage Example
 -------------
 
 ```
-from auth.userpass import Userpass
-userpass = Userpass.load(path_to_userpass)
-user = userpass.user()
-password = userpass.passwd()
+from userpass import Userpass
+userpass = Userpass(path_to_userpass)
+user = userpass.user
+password = userpass.passwd
 ```
 
 Example Userpass File
